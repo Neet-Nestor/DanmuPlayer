@@ -76,10 +76,10 @@
         this.$ctrlMain.append('<div class="opacity ctrl-btn-right"><input class="ctrl-btn-right danmu-op" value="100" type="range" /></div>');
         $("body").append('<div id="' + this.id.slice(1, this.id.length) + 'fontTip"  hidden="true">' +
             '<form  id="danmu-position">弹幕位置：' +
-            '<input type="radio" checked="checked"  name="danmu_position" value=0 />滚动&nbsp;&nbsp;<input type="radio" name="danmu_position" value=1 />顶端' +
-            '&nbsp;&nbsp;<input type="radio" name="danmu_position" value=2 />底端&nbsp;&nbsp;</form>' +
-            '<form  id="danmu-size" >弹幕大小：<input   type="radio" checked="checked"  name="danmu_size" value="1" />大文字&nbsp;&nbsp;' +
-            '<input   type="radio" name="danmu_size" value="0" />小文字&nbsp;&nbsp;</form>' +
+            '<input type="radio" checked="checked"  name="danmu_position" value=0 />滚动  <input type="radio" name="danmu_position" value=1 />顶端' +
+            '  <input type="radio" name="danmu_position" value=2 />底端  </form>' +
+            '<form  id="danmu-size" >弹幕大小：<input   type="radio" checked="checked"  name="danmu_size" value="1" />大文字  ' +
+            '<input   type="radio" name="danmu_size" value="0" />小文字  </form>' +
             '<div class="colpicker" ></div></div>');
 
 
@@ -163,7 +163,7 @@
                 alert("弹幕过长！");
                 return;
             }
-            text = text.replace(/&/g, "&gt;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/\n/g, "<br>");
+            text = text.replace(/&/g, ">").replace(/</g, "&lt;").replace(/>/g, ">").replace(/\"/g, "").replace(/\n/g, "<br>");
             var color = e.data.that.danmuColor;
             var position = $(e.data.that.id + " input[name=danmu_position]:checked").val();
             var size = $(e.data.that.id + " input[name=danmu_size]:checked").val();
@@ -274,12 +274,19 @@
 
 
         //调整透明度事件
+		/*
         $(this.id + " .danmu-op").on('mouseup touchend', {that: that}, function (e) {
             $(e.data.that.id + " .danmu-div").data("opacity", (e.target.value / 100));
             $(e.data.that.id + " .danmaku").css("opacity", (e.target.value / 100));
 
         });
-
+		*/
+		
+		//调整音量事件
+       /* $(this.id + " .danmu-op").on('change', {that: that}, function (e) {
+			$('.danmu-video').prop("volume", (this.value / 100));
+        });
+		*/
         //全屏事件
         $(this.id + " .full-screen").on("click", {video: this.video, that: that}, function (e) {
             if (!e.data.that.danmuPlayerFullScreen) {
